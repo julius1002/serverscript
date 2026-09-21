@@ -32,9 +32,9 @@
 #include <fcntl.h>
 #include <time.h>
 
-#include "cutils.h"
-#include "quickjs.h"
-#include "quickjs-libc.h"
+#include "../include/cutils.h"
+#include "../include/quickjs.h"
+#include "../include/quickjs-libc.h"
 
 #ifdef QJS_USE_MIMALLOC
 #include <mimalloc.h>
@@ -226,6 +226,14 @@ static const JSCFunctionListEntry global_obj[] = {
     JS_CFUNC_DEF("gc", 0, js_gc),
 };
 
+static JSValue js_my_add(JSContext *ctx, JSValue this_val, int argc, JSValue *argv)
+{
+	const char *arg = JS_ToCString(ctx, argv[0]);
+	const char *arg2 = JS_ToCString(ctx, argv[1]);
+	printf("args: %s...%s\n", arg, arg2);
+	return JS_NewString(ctx, "bla");
+}
+
 /* also used to initialize the worker context */
 static JSContext *JS_NewCustomContext(JSRuntime *rt)
 {
@@ -251,6 +259,16 @@ static JSContext *JS_NewCustomContext(JSRuntime *rt)
     JS_SetPropertyFunctionList(ctx, navigator_proto, navigator_proto_funcs, countof(navigator_proto_funcs));
     JSValue navigator = JS_NewObjectProto(ctx, navigator_proto);
     JS_DefinePropertyValueStr(ctx, global, "navigator", navigator, JS_PROP_CONFIGURABLE | JS_PROP_ENUMERABLE);
+
+    /* hello world function */
+    JS_SetPropertyStr(
+        ctx,
+        global,
+        "my_add",
+        JS_NewCFunction(ctx, js_my_add, "my_add", 2)
+    );
+
+
     JS_FreeValue(ctx, global);
     JS_FreeValue(ctx, navigator_proto);
 

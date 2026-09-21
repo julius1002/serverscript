@@ -31,8 +31,8 @@
 #include <assert.h>
 #include <errno.h>
 
-#include "cutils.h"
-#include "quickjs-libc.h"
+#include "../include/cutils.h"
+#include "../include/quickjs-libc.h"
 
 typedef enum {
     OUTPUT_C,

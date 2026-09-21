@@ -32,8 +32,8 @@
 #include <math.h>
 // #include <setjmp.h>
 
-#include "cutils.h"
-#include "dtoa.h"
+#include "../include/cutils.h"
+#include "../include/dtoa.h"
 
 /* 
    TODO:

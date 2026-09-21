@@ -41,11 +41,11 @@
 #include <sys/stat.h>
 #endif
 
-#include "cutils.h"
-#include "list.h"
-#include "quickjs.h"
-#include "quickjs-c-atomics.h"
-#include "quickjs-libc.h"
+#include "../include/cutils.h"
+#include "../include/list.h"
+#include "../include/quickjs.h"
+#include "../include/quickjs-c-atomics.h"
+#include "../include/quickjs-libc.h"
 
 #define CMD_NAME "run-test262"
 

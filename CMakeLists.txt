@@ -271,10 +271,10 @@ macro(add_static_if_needed target)
 endmacro()
 
 set(qjs_sources
-    dtoa.c
-    libregexp.c
-    libunicode.c
-    quickjs.c
+    src/dtoa.c
+    src/libregexp.c
+    src/libunicode.c
+    src/quickjs.c
 )
 
 if(QJS_BUILD_LIBC)
@@ -337,7 +337,7 @@ if(WIN32)
 endif()
 
 if(NOT QJS_BUILD_LIBC)
-    add_library(qjs-libc STATIC quickjs-libc.c)
+    add_library(qjs-libc STATIC src/quickjs-libc.c)
     target_compile_definitions(qjs-libc PRIVATE ${qjs_defines})
     target_link_libraries(qjs-libc PRIVATE ${qjs_libs} qjs)
 endif()
@@ -365,7 +365,7 @@ endif()
 #
 
 add_executable(qjsc
-    qjsc.c
+    src/qjsc.c
 )
 add_qjs_libc_if_needed(qjsc)
 add_static_if_needed(qjsc)
@@ -379,7 +379,7 @@ target_link_libraries(qjsc PRIVATE qjs)
 add_executable(qjs_exe
     gen/repl.c
     gen/standalone.c
-    qjs.c
+    src/qjs.c
 )
 add_qjs_libc_if_needed(qjs_exe)
 add_static_if_needed(qjs_exe)
@@ -439,7 +439,7 @@ endif()
 
 if(NOT EMSCRIPTEN)
     add_executable(run-test262
-        run-test262.c
+        src/run-test262.c
     )
     add_qjs_libc_if_needed(run-test262)
     target_compile_definitions(run-test262 PRIVATE ${qjs_defines})
@@ -450,26 +450,26 @@ endif()
 #
 
 add_executable(api-test
-    api-test.c
+    src/api-test.c
 )
 target_compile_definitions(api-test PRIVATE ${qjs_defines})
 target_link_libraries(api-test PRIVATE qjs)
 add_qjs_libc_if_needed(api-test)
 
 add_executable(lre-test
-    lre-test.c
-    libregexp.c
-    libunicode.c
+    src/lre-test.c
+    src/libregexp.c
+    src/libunicode.c
 )
 target_compile_definitions(lre-test PRIVATE ${qjs_defines})
 
 # Unicode generator
 #
 
-# Note: do not link libunicode.c here, it needs the generated libunicode-table.h,
+# Note: do not link libunicode.c here, it needs the generated include/libunicode-table.h,
 # which would make it impossible to regenerate the table from scratch.
 add_executable(unicode_gen EXCLUDE_FROM_ALL
-    unicode_gen.c
+    src/unicode_gen.c
 )
 target_compile_definitions(unicode_gen PRIVATE ${qjs_defines})
 
@@ -543,7 +543,7 @@ endif()
 #
 
 if (QJS_ENABLE_INSTALL)
-    file(STRINGS quickjs.h quickjs_h REGEX QJS_VERSION)
+    file(STRINGS include/quickjs.h quickjs_h REGEX QJS_VERSION)
     string(REGEX MATCH "QJS_VERSION_MAJOR ([0-9]*)" _ "${quickjs_h}")
     set(QJS_VERSION_MAJOR ${CMAKE_MATCH_1})
     string(REGEX MATCH "QJS_VERSION_MINOR ([0-9]*)" _ "${quickjs_h}")
@@ -554,9 +554,9 @@ if (QJS_ENABLE_INSTALL)
         VERSION ${QJS_VERSION_MAJOR}.${QJS_VERSION_MINOR}.${QJS_VERSION_PATCH}
         SOVERSION ${QJS_VERSION_MAJOR}
     )
-    install(FILES quickjs.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+    install(FILES include/quickjs.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     if(QJS_BUILD_LIBC)
-        install(FILES quickjs-libc.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        install(FILES include/quickjs-libc.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     endif()
     if(NOT IOS AND NOT TVOS AND NOT WATCHOS)
         install(TARGETS qjs_exe RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

@@ -42,11 +42,11 @@
 #include <time.h>
 #include <math.h>
 
-#include "cutils.h"
-#include "list.h"
-#include "quickjs.h"
-#include "libregexp.h"
-#include "dtoa.h"
+#include "../include/cutils.h"
+#include "../include/list.h"
+#include "../include/quickjs.h"
+#include "../include/libregexp.h"
+#include "../include/dtoa.h"
 
 #if defined(EMSCRIPTEN) || defined(_MSC_VER)
 #define DIRECT_DISPATCH  0
@@ -73,7 +73,7 @@
 // somehow the compiler forgets to load |ptr| into %rdi when calling
 // the __atomic_*() helpers in its lib/stdatomic.c and lib/atomic.S
 #if !defined(__TINYC__) && !defined(EMSCRIPTEN) && !defined(__wasi__) && !__STDC_NO_ATOMICS__ && !defined(__DJGPP)
-#include "quickjs-c-atomics.h"
+#include "../include/quickjs-c-atomics.h"
 #define CONFIG_ATOMICS
 #endif
 
@@ -1220,7 +1220,7 @@ typedef struct JSCallSiteData {
 enum {
     __JS_ATOM_NULL = JS_ATOM_NULL,
 #define DEF(name, str) JS_ATOM_ ## name,
-#include "quickjs-atom.h"
+#include "../include/quickjs-atom.h"
 #undef DEF
     JS_ATOM_END,
 };
@@ -1229,14 +1229,14 @@ enum {
 
 static const char js_atom_init[] =
 #define DEF(name, str) str "\0"
-#include "quickjs-atom.h"
+#include "../include/quickjs-atom.h"
 #undef DEF
 ;
 
 typedef enum OPCodeFormat {
 #define FMT(f) OP_FMT_ ## f,
 #define DEF(id, size, n_pop, n_push, f)
-#include "quickjs-opcode.h"
+#include "../include/quickjs-opcode.h"
 #undef DEF
 #undef FMT
 } OPCodeFormat;
@@ -1245,7 +1245,7 @@ typedef enum OPCodeEnum {
 #define FMT(f)
 #define DEF(id, size, n_pop, n_push, f) OP_ ## id,
 #define def(id, size, n_pop, n_push, f)
-#include "quickjs-opcode.h"
+#include "../include/quickjs-opcode.h"
 #undef def
 #undef DEF
 #undef FMT
@@ -1256,7 +1256,7 @@ typedef enum OPCodeEnum {
 #define FMT(f)
 #define DEF(id, size, n_pop, n_push, f)
 #define def(id, size, n_pop, n_push, f) OP_ ## id,
-#include "quickjs-opcode.h"
+#include "../include/quickjs-opcode.h"
 #undef def
 #undef DEF
 #undef FMT
@@ -8933,9 +8933,9 @@ int JS_IsInstanceOf(JSContext *ctx, JSValueConst val, JSValueConst obj)
     return JS_OrdinaryIsInstanceOf(ctx, val, obj);
 }
 
-#include "builtin-array-fromasync.h"
-#include "builtin-iterator-zip-keyed.h"
-#include "builtin-iterator-zip.h"
+#include "../include/builtin-array-fromasync.h"
+#include "../include/builtin-iterator-zip-keyed.h"
+#include "../include/builtin-iterator-zip.h"
 
 // like Function.prototype.call but monkey patch-proof
 static JSValue js_call_function(JSContext *ctx, JSValueConst this_val,
@@ -18067,7 +18067,7 @@ static JSValue JS_CallInternal(JSContext *caller_ctx, JSValueConst func_obj,
     __extension__ static const void * const dispatch_table[256] = {
 #define DEF(id, size, n_pop, n_push, f) && case_OP_ ## id,
 #define def(id, size, n_pop, n_push, f)
-#include "quickjs-opcode.h"
+#include "../include/quickjs-opcode.h"
         [ OP_COUNT ... 255 ] = &&case_default
     };
 #define SWITCH(pc)      DUMP_BYTECODE_OR_DONT(pc) __extension__ ({ goto *dispatch_table[opcode = *pc++]; });
@@ -22451,7 +22451,7 @@ static const JSOpCode opcode_info[OP_COUNT + (OP_TEMP_END - OP_TEMP_START)] = {
 #else
 #define DEF(id, size, n_pop, n_push, f) { size, n_pop, n_push, OP_FMT_ ## f },
 #endif
-#include "quickjs-opcode.h"
+#include "../include/quickjs-opcode.h"
 #undef DEF
 #undef FMT
 };

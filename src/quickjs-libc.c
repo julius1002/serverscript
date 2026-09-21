@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "quickjs.h"
+#include "../include/quickjs.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -85,12 +85,12 @@ extern char **environ;
 
 #endif /* _WIN32 */
 
-#include "cutils.h"
-#include "list.h"
-#include "quickjs-libc.h"
+#include "../include/cutils.h"
+#include "../include/list.h"
+#include "../include/quickjs-libc.h"
 
 #if JS_HAVE_THREADS
-#include "quickjs-c-atomics.h"
+#include "../include/quickjs-c-atomics.h"
 #define USE_WORKER // enable os.Worker
 #endif
 
