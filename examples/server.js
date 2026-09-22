@@ -8,10 +8,10 @@ function my_handler(req, res) {
 					 };
 
 		res.body = JSON.stringify(result);
-	} else if(req.method == "POST") {
-		console.log(req.body);
-		console.log("^^was posted");
-		res.body = "You posted";
+	} else {
+		res.status = 404;
+		res.reason = "Bad Request";
+		return;
 	}
 
 	const header = { name: "Authorization", value: "Icandoanything"};
