@@ -1,7 +1,7 @@
 #include "../include/serverutils.h"
 #include <stdlib.h>
-#include "../deps/blocking-queue/blocking_queue.h"
 #include "../deps/civetweb-1.16/include/civetweb.h"
+#include "../deps/blocking-queue/blocking_queue.h"
 
 
 JSClassID res_class_id;
@@ -109,7 +109,6 @@ void res_values_to_c(JSContext *ctx, JSValue argv[2], struct http_pair *pair) {
 
 	// status
 	const char *reason = NULL;
-	size_t len;
 	JSValue js_reason = JS_GetPropertyStr(ctx, argv[1], "reason");
 	reason = JS_ToCString(ctx, js_reason);
 
