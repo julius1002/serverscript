@@ -1,24 +1,16 @@
-# ⚡️ QuickJS - A mighty JavaScript engine
+# serverscript: fork of ⚡️ QuickJS - A mighty JavaScript engine
 
 ## Overview
 
-QuickJS is a small and embeddable JavaScript engine. It aims to support the latest
-[ECMAScript] specification.
+This project is a _fork_ of the _fork_ quickjs-ng the [original QuickJS project] by Fabrice Bellard and Charlie Gordon.
 
-This project is a _fork_ of the [original QuickJS project] by Fabrice Bellard and Charlie Gordon, after it went dormant, with the intent of reigniting its development.
+The purpose of this project is to embed webframework capabilities directly into the language.
 
-## Getting started
+## Example
 
-Head over to the [project website] for instructions on how to get started and more
-documentation.
+If you run examples/server.js it runs a a very basic webserver and you can define handlers directly without any dependencies.
+The webserver is actually the quite popular civetweb webserver (https://github.com/civetweb/civetweb).
 
-## Authors
+## Future work
 
-[@bnoordhuis], [@saghul], and many more [contributors].
-
-[ECMAScript]: https://tc39.es/ecma262/
-[original QuickJS project]: https://bellard.org/quickjs
-[@bnoordhuis]: https://github.com/bnoordhuis
-[@saghul]: https://github.com/saghul
-[contributors]: https://github.com/quickjs-ng/quickjs/graphs/contributors
-[project website]: https://quickjs-ng.github.io/quickjs/
+I plan to implement also database capabilities. Though right now, this language is just meant for prototyping and not for productive usage.

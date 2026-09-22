@@ -28,9 +28,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "cutils.h"
-#include "libregexp.h"
-#include "libunicode.h"
+#include "../include/cutils.h"
+#include "../include/libregexp.h"
+#include "../include/libunicode.h"
 
 /* ASCII identifier tables, used by lre_js_is_ident_first/next in libregexp.h
    and by quickjs.c. */
@@ -63,7 +63,7 @@ uint32_t const lre_id_continue_table_ascii[4] = {
 
 typedef enum {
 #define DEF(id, size) REOP_ ## id,
-#include "libregexp-opcode.h"
+#include "../include/libregexp-opcode.h"
 #undef DEF
     REOP_COUNT,
 } REOPCodeEnum;
@@ -117,7 +117,7 @@ static const REOpCode reopcode_info[REOP_COUNT] = {
 #else
 #define DEF(id, size) { size },
 #endif
-#include "libregexp-opcode.h"
+#include "../include/libregexp-opcode.h"
 #undef DEF
 };
 

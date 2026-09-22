@@ -1,6 +1,7 @@
 *.a
 *.orig
 *.so
+*.o
 .obj/
 build/
 build-*/
@@ -13,3 +14,4 @@ CMakeUserPresets.json
 fuzz
 .vscode/
 microbench*.txt
+*.swp

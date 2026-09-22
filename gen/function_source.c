@@ -1,6 +1,6 @@
 /* File generated automatically by the QuickJS-ng compiler. */
 
-#include "quickjs-libc.h"
+#include "../include/quickjs-libc.h"
 
 const uint32_t qjsc_function_source_size = 342;
 

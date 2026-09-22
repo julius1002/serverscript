@@ -27,9 +27,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "cutils.h"
-#include "libunicode.h"
-#include "libunicode-table.h"
+#include "../include/cutils.h"
+#include "../include/libunicode.h"
+#include "../include/libunicode-table.h"
 
 // note: stored as 4 bit tag, not much room left
 enum {

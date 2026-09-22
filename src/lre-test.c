@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
-#include "libregexp.h"
+#include "../include/libregexp.h"
 
 // If >= 0, the next 'alloc_countdown' allocations succeed and the one after
 // that fails. Used to inject out-of-memory conditions in the compiler.

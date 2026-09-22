@@ -5,9 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "quickjs.h"
-#include "quickjs-libc.h"
-#include "cutils.h"
+#include "../include/quickjs.h"
+#include "../include/quickjs-libc.h"
+#include "../include/cutils.h"
 
 static JSRuntime *new_runtime(void)
 {
