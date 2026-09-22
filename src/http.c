@@ -18,7 +18,7 @@ char *serialize(struct http_response *res, size_t *response_len) {
 
         *response_len = 0;
 
-        n = snprintf(NULL, 0, "HTTP/1.1 %d %s\r\n", res->status, res->reason ? res->reason : "");
+        n = snprintf(NULL, 0, "HTTP/1.1 %d %s\r\n", res->status, res->reason != NULL ? res->reason : "");
 
         if (n < 0) {
             return NULL;
@@ -51,7 +51,7 @@ char *serialize(struct http_response *res, size_t *response_len) {
             return NULL;
 	}
 
-        n = snprintf(raw + pos, len + 1 - pos, "HTTP/1.1 %d %s\r\n", res->status, res->reason ? res->reason : "");
+        n = snprintf(raw + pos, len + 1 - pos, "HTTP/1.1 %d %s\r\n", res->status, res->reason != NULL ? res->reason : "");
 
         if (n < 0) {
             goto error;

@@ -103,10 +103,17 @@ void res_values_to_c(JSContext *ctx, JSValue argv[2], struct http_pair *pair) {
 	// status
 	int status;
 	JSValue js_status = JS_GetPropertyStr(ctx, argv[1], "status");
-        if (JS_ToInt32(ctx, &status, js_status)) {
-		//return JS_EXCEPTION;
+        if (!JS_ToInt32(ctx, &status, js_status)) {
+		pair->res.status = (status <= 0 ? 200 : status);
 	}
-	pair->res.status = (status <= 0 ? 200 : status);
+
+	// status
+	const char *reason = NULL;
+	size_t len;
+	JSValue js_reason = JS_GetPropertyStr(ctx, argv[1], "reason");
+	reason = JS_ToCString(ctx, js_reason);
+
+	pair->res.reason = reason;
 
 	// headers
 	res_headers_to_c(ctx, argv, pair);
