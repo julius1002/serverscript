@@ -275,6 +275,12 @@ set(qjs_sources
     src/libregexp.c
     src/libunicode.c
     src/quickjs.c
+    src/libserver.c
+    src/serverutils.c
+    src/utils.c
+    src/http.c
+    deps/blocking-queue/blocking_queue.c
+    deps/blocking-queue/sem.c
 )
 
 if(QJS_BUILD_LIBC)
@@ -380,6 +386,7 @@ add_executable(qjs_exe
     gen/repl.c
     gen/standalone.c
     src/qjs.c
+    deps/civetweb-1.16/out/src/civetweb.o
 )
 add_qjs_libc_if_needed(qjs_exe)
 add_static_if_needed(qjs_exe)

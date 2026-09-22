@@ -109,6 +109,9 @@ jscheck:
 	$(CC) $(CFLAGS) src/quickjs-libc.c
 	$(CC) $(CFLAGS) src/quickjs.c
 	$(CC) $(CFLAGS) run-test262.c
+	$(CC) $(CFLAGS) src/serverutils.c
+	$(CC) $(CFLAGS) src/libserver.c
+	$(CC) $(CFLAGS) src/utils.c
 
 # effectively .PHONY because it doesn't generate output
 ctest: CFLAGS=-std=c11 -fsyntax-only -Wall -Wextra -Werror -pedantic

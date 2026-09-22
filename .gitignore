@@ -1,6 +1,7 @@
 *.a
 *.orig
 *.so
+*.o
 .obj/
 build/
 build-*/
