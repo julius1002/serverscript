@@ -6,6 +6,10 @@ This project is a _fork_ of the _fork_ quickjs-ng the [original QuickJS project]
 
 The purpose of this project is to embed webframework capabilities directly into the language.
 
+## Dependencies
+
+Please read the README.md in the dependencies folder.
+
 ## Example
 
 If you run examples/server.js it runs a a very basic webserver and you can define handlers directly without any dependencies.

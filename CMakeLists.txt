@@ -276,6 +276,7 @@ set(qjs_sources
     src/libunicode.c
     src/quickjs.c
     src/libserver.c
+    src/libpostgres.c
     src/serverutils.c
     src/utils.c
     src/http.c
@@ -313,7 +314,14 @@ target_compile_definitions(qjs PRIVATE ${qjs_defines})
 target_include_directories(qjs PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    /opt/homebrew/opt/libpq/include
 )
+
+list(APPEND qjs_libs 
+		/opt/homebrew/opt/libpq/lib/libpq.dylib
+)
+
+
 target_link_libraries(qjs PUBLIC ${qjs_libs})
 
 # Pass a compiler definition so that Windows gets its declspec's right.
