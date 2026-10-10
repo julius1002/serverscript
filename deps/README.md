@@ -8,4 +8,6 @@
 
 3. After unzip you should build civetweb
 
-4. Then you should be able to build the whole project with make
+4. You need to install libpq for postgresql and set it correctly in the CMakeLists.txt (find it with strg + f and replace the include path and the dylib path with yours)
+
+5. Then you should be able to build the whole project with make

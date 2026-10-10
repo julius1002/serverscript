@@ -235,6 +235,8 @@ static JSValue js_my_add(JSContext *ctx, JSValue this_val, int argc, JSValue *ar
 	return JS_NewString(ctx, "bla");
 }
 
+JSModuleDef *js_init_module_postgres(JSContext *ctx, const char *module_name);
+
 /* also used to initialize the worker context */
 static JSContext *JS_NewCustomContext(JSRuntime *rt)
 {
@@ -247,6 +249,7 @@ static JSContext *JS_NewCustomContext(JSRuntime *rt)
     js_init_module_os(ctx, "qjs:os");
     js_init_module_bjson(ctx, "qjs:bjson");
     js_init_module_server(ctx, "server");
+    js_init_module_postgres(ctx, "postgres");
 
     JSValue global = JS_GetGlobalObject(ctx);
     JS_SetPropertyFunctionList(ctx, global, global_obj, countof(global_obj));
